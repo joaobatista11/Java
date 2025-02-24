@@ -8,8 +8,9 @@ public class Exercicio_5_Conversor_de_Moedas {
         Scanner tecla = new Scanner(System.in);
         System.out.println("Digite o valor em real");
         double r = tecla.nextDouble();
-        double d = r / 5.45;
-        System.out.println("O dolar ta 5.45. O dolar em real e: R$" + String.format("%.2f", d));
+        double d = r * 5.45;
+        System.out.println("Convertido em " + String.format("%.2f", d) + " dolares");
+
     }
 
 }
