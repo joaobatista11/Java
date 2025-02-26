@@ -15,11 +15,15 @@ public class Exercicio_8_Multiplo_de_3_e_de_7 {
         Scanner tecla = new Scanner(System.in);
         System.out.println("Digite o numero");
         int n = tecla.nextInt();
-        boolean a = ((n % 3 == 0) && (n% 7 ==0));
+        boolean a = ((n % 3 == 0) && (!(n% 7 ==0)));
         if(a==true){
-            System.out.println("O numero "+n+" e multiplo de 3 e de 7");
+            System.out.println("O numero e multiplo de 3");
+        }else if (n % 3 != 0 && n % 7 != 0){
+            System.out.println("O numero nao e multiplo de 3 e nem de 7");
+        }else if (n % 3 == 0 && n % 7 == 0){
+            System.out.println("O numero e multiplo de 3 e de 7");
         }else{
-            System.out.println("O numero "+n+" nao e multiplo de 3 e de 7");        
+            System.out.println("O numero e multiplo de 7");        
         }
 
     }
