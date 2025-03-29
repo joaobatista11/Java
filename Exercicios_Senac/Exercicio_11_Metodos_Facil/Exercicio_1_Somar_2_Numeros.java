@@ -1,5 +1,5 @@
 
-package Exercicio_11_Metodo_Facil;
+package Exercicio_11_Metodos_Facil;
 
 import java.util.Scanner;
 

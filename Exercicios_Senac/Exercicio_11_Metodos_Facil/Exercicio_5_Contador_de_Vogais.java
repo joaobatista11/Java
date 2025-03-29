@@ -1,5 +1,5 @@
 
-package Exercicio_11_Metodo_Facil;
+package Exercicio_11_Metodos_Facil;
 
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ public class Exercicio_5_Contador_de_Vogais {
     public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);    
     String p;
-    System.out.println("Digite uma frase");        
+    System.out.println("Escreva uma palavra");        
     p=sc.nextLine().toLowerCase();
     contador_de_vogais(p);
     }

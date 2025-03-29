@@ -1,5 +1,5 @@
 
-package Exercicio_11_Metodo_Facil;
+package Exercicio_11_Metodos_Facil;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class Exercicio_4_Coversor_de_Temperatura {
         Fahrenheit(c);
     }
 
-    private static double Fahrenheit(int c) {
+    public static double Fahrenheit(int c) {
         double f;
         f=(c*9/5)+32;
         System.out.println(f);
