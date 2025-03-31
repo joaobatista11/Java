@@ -9,7 +9,7 @@ public class Exercicio_5_Maior_Valor {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int t;
-        System.out.println("Quantos numeros voce quer somar?");
+        System.out.println("Quantos numeros voce quer no array?");
         t = sc.nextInt();
         int[] n = new int[t];
         for (int c = 0; c < t; c++) {
