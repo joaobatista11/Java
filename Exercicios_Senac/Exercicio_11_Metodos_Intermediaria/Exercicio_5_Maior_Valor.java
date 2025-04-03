@@ -1,4 +1,4 @@
-package Exercicio_11_Metodos_Intermediaria;
+package com.mycompany.projeto.Exercicio_11_Metodos_Intermediaria;
 
 import static java.util.Arrays.sort;
 import java.util.Collections;
@@ -9,7 +9,7 @@ public class Exercicio_5_Maior_Valor {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int t;
-        System.out.println("Quantos numeros voce quer somar?");
+        System.out.println("Quantos numeros voce quer no array?");
         t = sc.nextInt();
         int[] n = new int[t];
         for (int c = 0; c < t; c++) {
@@ -21,7 +21,9 @@ public class Exercicio_5_Maior_Valor {
 
     public static int maiornumero(int[] n, int t) {
         sort(n);
-        return n[1];
+        int u;
+        u=t-1;
+        return n[u];
 
     }
 
