@@ -3,7 +3,7 @@ package Lista_de_Exercicio_1.Exercicio_10_Plano_Cartesiano;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_Cartesiano {
 
         public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
