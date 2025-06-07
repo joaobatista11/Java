@@ -15,7 +15,7 @@ public class Carro implements Veiculo{
 
     @Override
     public String virar(String direcao) {
-        return "Virado para a "+direcao+" com o Carro";
+        return "Virando para a "+direcao+" com o Carro";
     }
 
 }

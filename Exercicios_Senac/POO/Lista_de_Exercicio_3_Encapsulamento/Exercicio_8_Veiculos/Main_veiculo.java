@@ -46,10 +46,10 @@ public class Main_veiculo {
             switch(a){
                 case 1 ->{System.out.println(obj[i].acelerar());}
                 case 2 ->{System.out.println(obj[i].frear());}
-                case 3 ->{System.out.println("\nEscolha a direção\n1 - Esquerda\n2 - Direita?");
+                case 3 ->{System.out.println("\nEscolha a direção\n1 - Esquerda\n2 - Direita");
                 dv = sc_num.nextInt();
                 while(dv<1 || dv>2){
-               System.out.println("\nDireção inválida\nEscolha a direção\n1 - Esquerda\n2 - Direita?");
+               System.out.println("\nDireção inválida\nEscolha a direção\n1 - Esquerda\n2 - Direita");
                 dv = sc_num.nextInt();
                 }
                 if(dv==1){
