@@ -15,6 +15,6 @@ public class Bicicleta implements Veiculo{
 
     @Override
     public String virar(String direcao) {
-        return "Virado para a "+direcao+" com a bicicleta";
+        return "Virando para a "+direcao+" com a bicicleta";
     }
 }
