@@ -5,25 +5,32 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 public class Modelo_Tabela extends AbstractTableModel{ // extensor do próprio java
-    private static final String[] colunas = {"id","carta","valor"};
-    private ArrayList<Baralho_Jogador>cartas;
+     private static final String[] colunas = {"id", "carta", "valor"};
+    private ArrayList<Baralho_Jogador> dados;
 
     public Modelo_Tabela(ArrayList<Baralho_Jogador> cartas) {
         super();
-        this.cartas = cartas;
+        this.dados = cartas;         
     }
+
+    public void setDados(ArrayList<Baralho_Jogador> novosDados) {
+        this.dados = novosDados;
+        fireTableDataChanged();
+    }
+
     @Override
-    public String getColumnName(int column){
+    public String getColumnName(int column) {
         return colunas[column];
     }
-    public void adicionar_cliente(Baralho_Jogador cliente){
-    this.cartas.add(cliente);
-    fireTableDataChanged();
+
+    public void adicionar_carta(Baralho_Jogador carta) {
+        this.dados.add(carta);
+        fireTableDataChanged();
     }
-    
+
     @Override
     public int getRowCount() {
-        return cartas.size();
+        return dados == null ? 0 : dados.size();
     }
 
     @Override
@@ -33,16 +40,24 @@ public class Modelo_Tabela extends AbstractTableModel{ // extensor do próprio j
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Baralho_Jogador carta = cartas.get(rowIndex); // rowIndex: linhas
+        Baralho_Jogador carta = dados.get(rowIndex);
         switch (columnIndex) {
-            case 0:
-                return carta.getId();
-            case 1:
-                return carta.getCarta();
-            case 2:
-                return carta.getValor();
-            default:
-                return null;
+            case 0: return carta.getId();
+            case 1: return carta.getCarta();
+            case 2: return carta.getValor();
+            default: return null;
         }
     }
+    
+    
+//    public ArrayList<Baralho_Jogador> getDados() {
+//        return dados;
+//    }
+//
+//    public void setDados(ArrayList<Baralho_Jogador> dados) {
+//        this.dados = dados;
+//    }
+    
+    
+    
 }

@@ -18,7 +18,8 @@ public class DAO {
     
     private static String adicionar_carta = "Insert into baralho_jogador (id, carta, valor) values (null, ?, ?);";
     private static String listar_cartas = "select * from baralho_jogador where 1 = 1;";
-    private static String excluir_cartas = "truncate baralho_jogador;";    
+    private static String excluir_cartas = "truncate baralho_jogador;";
+    private static String somar_cartas = "select sum(valor) from baralho_jogador;";    
     //public DAO {
 public void adicionar_carta() throws SQLException {
     Embaralhamento rd = new Embaralhamento();
@@ -59,10 +60,6 @@ public void adicionar_carta() throws SQLException {
             }catch(SQLException e){
                 e.printStackTrace();            
             }
-        if(cartas_jogador.isEmpty()){
-        JOptionPane.showMessageDialog(null, "Não há cartas",
-                "", JOptionPane.WARNING_MESSAGE);
-        }
         return cartas_jogador;
 }        
 public void excluir_cartas() throws SQLException {
@@ -70,23 +67,45 @@ public void excluir_cartas() throws SQLException {
     Baralho_Jogador baralho = new Baralho_Jogador(1, rd.getCarta(), rd.getValor());
     Connection connection = Conexao.getConn().abrir_conexao();
     connection.setAutoCommit(false);
-    System.out.println("Teste 11");
+    //System.out.println("Teste 11");
     try {
         ps = connection.prepareStatement(excluir_cartas);
-        int i = 1;
-        ps.setString(i++, baralho.getCarta());
-        ps.setInt(i++, baralho.getValor());
         ps.executeUpdate(); // ← Use isso para INSERT
         connection.commit();
     } catch(SQLException e) {
         e.printStackTrace();
         //connection.rollback(); // ← Importante em caso de erro
+        if (connection != null) connection.rollback();
+    } finally {
+        if (ps != null) ps.close();
+        if (connection != null) connection.close();
     }
-//    } finally {
-//        if (ps != null) ps.close();
-//        if (connection != null) connection.close();
-//    }
-}        
+}
+
+public int somar_cartas() throws SQLException {
+ int soma = 0;
+
+    Connection connection = Conexao.getConn().abrir_conexao();
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+        ps = connection.prepareStatement(somar_cartas);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            soma = rs.getInt("valor"); // ou rs.getInt(1)
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        if (rs != null) rs.close();
+        if (ps != null) ps.close();
+        if (connection != null) connection.close();
+    }
+
+    return soma;
+}
 }  
 
         

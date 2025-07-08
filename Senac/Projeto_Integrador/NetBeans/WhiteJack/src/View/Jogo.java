@@ -7,6 +7,7 @@ package View;
 import DAO.DAO;
 import Model.Baralho_Jogador;
 import Model.Modelo_Tabela;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -18,6 +19,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 /**
  *
  * @author adm
@@ -26,7 +28,9 @@ public class Jogo extends javax.swing.JFrame {
     private ArrayList<Baralho_Jogador> baralho_jogador;
     private Modelo_Tabela modelo_tabela;
     public Jogo() {
+  //setDefaultCloseOperation(DISPOSE_ON_CLOSE);        
         initComponents();
+        
                 setTitle("Jogo");
         // Inicializar a lista de clientes
         DAO dao = new DAO();
@@ -41,7 +45,8 @@ public class Jogo extends javax.swing.JFrame {
         Tabela_Jogador.setModel(modelo_tabela);
         
         Botao_Adicionar_Carta.addActionListener(new ActionListener(){ //
-    
+            
+            
         @Override
         public void actionPerformed(ActionEvent e){
         }
@@ -49,12 +54,7 @@ public class Jogo extends javax.swing.JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                try {
-dao.excluir_cartas();
-                } catch (SQLException ex) {
-                    Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            dispose(); // Fecha apenas a janela
+            //dispose(); // Fecha apenas a janela
             }
         });
 
@@ -163,34 +163,41 @@ dao.excluir_cartas();
     
     private void Botao_Adicionar_CartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Botao_Adicionar_CartaActionPerformed
         // TODO add your handling code here:
-        try{
+    try {
         DAO dao = new DAO();
         dao.adicionar_carta();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());        
-        }
+
+        // Atualiza a lista e o modelo
+        baralho_jogador = dao.listar_cartas();
+        modelo_tabela.setDados(baralho_jogador);
+        modelo_tabela.fireTableDataChanged(); // Atualiza a tabela visualmente
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());        
+    }
     }//GEN-LAST:event_Botao_Adicionar_CartaActionPerformed
 
-    
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Baralho_Jogador baralho = 
-               new Jogo().setVisible(true);
-                if(baralho.getSoma()>21){
-                
-                //}
+        public void run() {
+            Label label = new Label();
+            DAO dao = new DAO();
+            Jogo jogo = new Jogo();
+            jogo.setVisible(true);
+            //Soma_Jogador.add(dao.somar_cartas());
+
+            try {
+                jogo.getSoma_jogador().setText("Total: " + dao.somar_cartas()); // Se precisar acessar diretamente
+            } catch (SQLException ex) {
+                Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        });
+        }
+    });
     }
+                
 
-}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Botao_Adicionar_Carta;
     private javax.swing.JLabel Soma_Adversario;
@@ -201,5 +208,10 @@ dao.excluir_cartas();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
+public JLabel getSoma_jogador(){
+return Soma_Jogador;
+}
+
 }
 
