@@ -94,7 +94,7 @@ public int somar_cartas() throws SQLException {
         rs = ps.executeQuery();
 
         if (rs.next()) {
-            soma = rs.getInt("valor"); // ou rs.getInt(1)
+            soma = rs.getInt(1); // ou rs.getInt(1)
         }
     } catch (SQLException e) {
         e.printStackTrace();

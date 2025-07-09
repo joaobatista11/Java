@@ -20,6 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 /**
  *
  * @author adm
@@ -27,39 +29,52 @@ import javax.swing.JLabel;
 public class Jogo extends javax.swing.JFrame {
     private ArrayList<Baralho_Jogador> baralho_jogador;
     private Modelo_Tabela modelo_tabela;
-    public Jogo() {
-  //setDefaultCloseOperation(DISPOSE_ON_CLOSE);        
-        initComponents();
-        
-                setTitle("Jogo");
-        // Inicializar a lista de clientes
-        DAO dao = new DAO();
-        try{
-            baralho_jogador = dao.listar_cartas();
-        }catch(Exception e){
-        e.printStackTrace();
-        baralho_jogador = new ArrayList<>();
-        }
-        modelo_tabela = new Modelo_Tabela(baralho_jogador);
-        
-        Tabela_Jogador.setModel(modelo_tabela);
-        
-        Botao_Adicionar_Carta.addActionListener(new ActionListener(){ //
-            
-            
-        @Override
-        public void actionPerformed(ActionEvent e){
-        }
-    });
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-            //dispose(); // Fecha apenas a janela
-            }
-        });
+public Jogo() throws SQLException {
+    initComponents();
+    setTitle("Jogo");
 
-        setVisible(true);
-    }                  
+    // Inicializar a tabela com lista vazia
+    baralho_jogador = new ArrayList<>();
+    modelo_tabela = new Modelo_Tabela(baralho_jogador);
+    Tabela_Jogador.setModel(modelo_tabela);
+
+    DAO dao = new DAO();
+    setVisible(true); // Exibe a janela
+
+    SwingWorker<Void, Void> worker = new SwingWorker<>() {
+        @Override
+        protected Void doInBackground() throws Exception {
+            baralho_jogador = dao.listar_cartas();
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            try {
+                // Atualizar a interface com os dados reais
+                Jogo.this.getSoma_jogador().setText("Total: " + dao.somar_cartas());
+
+                modelo_tabela = new Modelo_Tabela(baralho_jogador);
+                Tabela_Jogador.setModel(modelo_tabela);
+
+                if (dao.somar_cartas() > 21) {
+                    JOptionPane.showMessageDialog(
+                        Jogo.this,
+                        "Você estourou",
+                        "Game Over",
+                        JOptionPane.WARNING_MESSAGE
+                    );
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                baralho_jogador = new ArrayList<>();
+            }
+        }
+    };
+
+    worker.execute(); // Inicia o carregamento
+}                  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -166,12 +181,19 @@ public class Jogo extends javax.swing.JFrame {
     try {
         DAO dao = new DAO();
         dao.adicionar_carta();
-
+        //Jogo jogo = new Jogo();
         // Atualiza a lista e o modelo
         baralho_jogador = dao.listar_cartas();
         modelo_tabela.setDados(baralho_jogador);
         modelo_tabela.fireTableDataChanged(); // Atualiza a tabela visualmente
-
+            //try {
+                modelo_tabela.fireTableDataChanged();
+                //this.getSoma_jogador().fire
+               this.getSoma_jogador().setText("Total: " + dao.somar_cartas()); // Se precisar acessar diretamente
+//                setVisible(true);                
+            } catch (SQLException ex) {
+                Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+            //}
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e.getMessage());        
     }
@@ -181,14 +203,12 @@ public class Jogo extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
-            Label label = new Label();
-            DAO dao = new DAO();
-            Jogo jogo = new Jogo();
-            jogo.setVisible(true);
-            //Soma_Jogador.add(dao.somar_cartas());
-
             try {
-                jogo.getSoma_jogador().setText("Total: " + dao.somar_cartas()); // Se precisar acessar diretamente
+                Label label = new Label();
+                DAO dao = new DAO();
+                Jogo jogo = new Jogo();
+                jogo.setVisible(true);
+                //Soma_Jogador.add(dao.somar_cartas());
             } catch (SQLException ex) {
                 Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
             }

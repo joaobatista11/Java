@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -80,21 +81,22 @@ public class Menu extends javax.swing.JFrame {
 
     private void JogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JogarActionPerformed
 //        try {
-            Jogo j = new Jogo();
-            DAO dao = new DAO();
-            
-//        try {
-//dao.excluir_cartas(); // Limpa a tabela no banco
-
+        try {
 // Agora abre o jogo
 //Jogo j = new Jogo();
-//    } catch (SQLException ex) {
-//        ex.printStackTrace();
-//        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-//    }
+     DAO dao = new DAO();
+dao.excluir_cartas(); // Limpa a tabela no banco
+
+            Jogo j = new Jogo();
 j.setLocationRelativeTo(null); // Centraliza a janela
 j.setVisible(true);
 dispose(); // Fecha o menu
+
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
 //        } catch (SQLException ex) {
 //            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
 //        }
