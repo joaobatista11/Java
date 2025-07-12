@@ -85,8 +85,8 @@ public class Menu extends javax.swing.JFrame {
 // Agora abre o jogo
 //Jogo j = new Jogo();
      DAO dao = new DAO();
-dao.excluir_cartas(); // Limpa a tabela no banco
-
+dao.excluir_cartas_jogador(); // Limpa a tabela no banco
+dao.excluir_cartas_adversario();
             Jogo j = new Jogo();
 j.setLocationRelativeTo(null); // Centraliza a janela
 j.setVisible(true);

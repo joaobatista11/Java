@@ -8,4 +8,12 @@ carta varchar(20),
 valor tinyint(2)
 )default charset = utf8mb4;
 
-truncate baralho_jogador;
+create table baralho_adversario(
+id integer primary key auto_increment,
+carta varchar(20),
+valor tinyint(2)
+)default charset = utf8mb4;
+
+select * from baralho_jogador;
+
+select sum(valor) from baralho_jogador;

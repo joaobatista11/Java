@@ -4,11 +4,11 @@ package Model;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
-public class Modelo_Tabela extends AbstractTableModel{ // extensor do próprio java
+public class Modelo_Tabela_Jogador extends AbstractTableModel{ // extensor do próprio java
      private static final String[] colunas = {"id", "carta", "valor"};
     private ArrayList<Baralho_Jogador> dados;
 
-    public Modelo_Tabela(ArrayList<Baralho_Jogador> cartas) {
+    public Modelo_Tabela_Jogador(ArrayList<Baralho_Jogador> cartas) {
         super();
         this.dados = cartas;         
     }
@@ -49,14 +49,6 @@ public class Modelo_Tabela extends AbstractTableModel{ // extensor do próprio j
         }
     }
     
-    
-//    public ArrayList<Baralho_Jogador> getDados() {
-//        return dados;
-//    }
-//
-//    public void setDados(ArrayList<Baralho_Jogador> dados) {
-//        this.dados = dados;
-//    }
     
     
     
