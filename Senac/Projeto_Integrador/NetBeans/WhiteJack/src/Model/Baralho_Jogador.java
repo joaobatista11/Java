@@ -1,11 +1,10 @@
 
 package Model;
 
-
 public class Baralho_Jogador {
-    private int id, valor,soma;
+    private int id, valor;
     private String carta;
-
+    
     public Baralho_Jogador(int id, String carta, int valor) {
         super();
         this.id = id;
@@ -17,24 +16,12 @@ public class Baralho_Jogador {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getValor() {
         return valor;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
     }
 
     public String getCarta() {
         return carta;
     }
 
-    public void setCarta(String carta) {
-        this.carta = carta;
-    }
-    
 }

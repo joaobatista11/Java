@@ -11,7 +11,7 @@ public class Embaralhamento {
             "7", "8", "9", "10", "Valete", "Dama", "Rei"));         
 
     private String carta;
-    private int valor, soma;
+    private int valor;
 
     public void embaralhar() {
         Collections.shuffle(cartas);
@@ -30,7 +30,7 @@ public class Embaralhamento {
 
     private void setValor(String carta) {
         switch (carta) {
-            case "Ás": valor = 1; break;
+            case "Ás": valor = 11; break;
             case "Valete":
             case "Dama":
             case "Rei":

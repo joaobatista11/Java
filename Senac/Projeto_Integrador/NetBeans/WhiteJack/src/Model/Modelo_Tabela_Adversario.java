@@ -14,7 +14,8 @@ public class Modelo_Tabela_Adversario extends AbstractTableModel{ // extensor do
     }
 
     public void setDados(ArrayList<Baralho_Adversario> novosDados) {
-        this.dados = novosDados;
+    this.dados.clear();
+    this.dados.addAll(novosDados);
         fireTableDataChanged();
     }
 

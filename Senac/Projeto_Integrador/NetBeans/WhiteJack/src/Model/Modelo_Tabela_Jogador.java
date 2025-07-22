@@ -14,7 +14,8 @@ public class Modelo_Tabela_Jogador extends AbstractTableModel{ // extensor do pr
     }
 
     public void setDados(ArrayList<Baralho_Jogador> novosDados) {
-        this.dados = novosDados;
+    this.dados.clear();
+    this.dados.addAll(novosDados);
         fireTableDataChanged();
     }
 

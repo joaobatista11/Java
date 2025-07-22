@@ -4,12 +4,22 @@
  */
 package View;
 
-import DAO.DAO;
+import java.awt.AlphaComposite;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+//import java.awt.image.BufferedImage;
+//import java.io.File;
+//import java.io.IOException;
+//import javax.imageio.ImageIO;
+
 
 public class Menu extends javax.swing.JFrame {
 
@@ -17,19 +27,57 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
                 setTitle("Menu");
 
+        Audio audio= new Audio();
+        audio.tocar_musica("src/Sons/heisenberg.wav");
+                
+    setSize(615,615);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(null);
+        
+        //Criando o painel com a imagem
+        JPanel p = new JPanel(){
+        @Override
+        protected void paintComponent(Graphics g){
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g.create();
+        Image imagem = new ImageIcon("src/Imagens/Walter_White_fofo.gif").getImage();        
+        float transparencia = 1f;
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,transparencia));
+        g2d.drawImage(imagem,0,0,getWidth(),getHeight(),this);
+        g2d.drawImage(imagem, 0,0,600,600, this);
+        g2d.dispose();
+        }
+        };
+        p.setBounds(0,0,600,600);
+        p.setOpaque(true);
+        p.setLayout(null);
+        
+        
+    // Posicione os componentes manualmente
+//    jLabel1.setBounds(150, 30, 400, 70);
+//    Jogar.setBounds(260, 500, 100, 30);
+
+    // Adicione os componentes ao painel
+    p.add(jLabel1);
+    p.add(Jogar);
+
+    // Adicione o painel ao conteúdo da janela
+    getContentPane().add(p);        
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         Jogar = new javax.swing.JButton();
-        label1 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(57, 28, 0));
+        jLabel1.setFont(new java.awt.Font("High Tower Text", 0, 60)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Whitejack");
 
         Jogar.setText("Jogar");
         Jogar.addActionListener(new java.awt.event.ActionListener() {
@@ -38,68 +86,43 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        label1.setFont(new java.awt.Font("Elephant", 0, 36)); // NOI18N
-        label1.setForeground(new java.awt.Color(255, 255, 255));
-        label1.setText("Whitejack");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(264, 264, 264)
-                .addComponent(Jogar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(204, Short.MAX_VALUE)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(205, 205, 205))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addComponent(Jogar)
-                .addGap(120, 120, 120))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(169, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(169, 169, 169))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(264, 264, 264)
+                .addComponent(Jogar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 315, Short.MAX_VALUE)
+                .addComponent(Jogar)
+                .addGap(140, 140, 140))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void JogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JogarActionPerformed
-//        try {
-        try {
-// Agora abre o jogo
-//Jogo j = new Jogo();
-     DAO dao = new DAO();
-dao.excluir_cartas_jogador(); // Limpa a tabela no banco
-dao.excluir_cartas_adversario();
-            Jogo j = new Jogo();
-j.setLocationRelativeTo(null); // Centraliza a janela
-j.setVisible(true);
-dispose(); // Fecha o menu
+        try{
+            Jogo novo = new Jogo();
+            novo.setLocationRelativeTo(null);
+            novo.setVisible(true);
+            dispose();
 
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_JogarActionPerformed
 
     public static void main(String args[]) {
@@ -107,14 +130,12 @@ dispose(); // Fecha o menu
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Menu().setVisible(true);
-        //JLabel resultadoLabel = new JLabel("Total: "+soma);                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Jogar;
-    private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
