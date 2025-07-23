@@ -34,7 +34,7 @@ import javax.swing.Timer;
  * @author adm
  */
 public class Jogo extends javax.swing.JFrame {
-
+    private int i;
     private Jogo jogoAnterior;
     private ArrayList<Baralho_Jogador> baralho_jogador;
     private Modelo_Tabela_Jogador modelo_tabela_jogador;
@@ -45,7 +45,6 @@ public class Jogo extends javax.swing.JFrame {
     public Jogo() throws SQLException {
         initComponents();
         setTitle("Jogo");
-
     setSize(615,435);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -57,12 +56,18 @@ public class Jogo extends javax.swing.JFrame {
         protected void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g.create();
-        Image imagem = new ImageIcon("src/Imagens/mesa.jpg").getImage();        
+        Image imagem = new ImageIcon("src/Imagens/mesa.jpg").getImage();
+        Image imagem2 = new ImageIcon("src/Imagens/Walter_White_Jogo.png").getImage();        
         float transparencia = 1f;
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,transparencia));
         g2d.drawImage(imagem,0,0,getWidth(),getHeight(),this);
         g2d.drawImage(imagem, 0,0,600,400, this);
+        
+        g2d.drawImage(imagem,0,0,getWidth(),getHeight(),this);
+        g2d.drawImage(imagem2, 60,25,82,120, this);        
+        
         g2d.dispose();
+        
         }
         };
         p.setBounds(0,0,600,400);
@@ -71,8 +76,6 @@ public class Jogo extends javax.swing.JFrame {
         
         getContentPane().add(p);
 
-        JTable t = new JTable();
-        
         p.add(Botao_Adicionar_Carta);
         p.add(Botao_Parar);
         p.add(Pegar_Carta);
@@ -81,12 +84,14 @@ public class Jogo extends javax.swing.JFrame {
 //        Tabela_Jogador.setBounds(285, 30, 400, 70);
 //        Tabela_Adversario.setBounds(260, 500, 100, 30);
         
-        p.add(Tabela_Jogador);
+//        p.add(Tabela_Jogador);
         p.add(Soma_Jogador);        
         
-        p.add(Tabela_Adversario);
+//        p.add(Tabela_Adversario);
         p.add(Soma_Adversario);
-
+// Exemplo: suponha que a coluna da imagem seja a coluna 1 ("Carta")
+//Tabela_Jogador.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
+//Tabela_Adversario.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
         baralho_jogador = new ArrayList<>();
         modelo_tabela_jogador = new Modelo_Tabela_Jogador(baralho_jogador);
         Tabela_Jogador.setModel(modelo_tabela_jogador);
@@ -189,9 +194,9 @@ public class Jogo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Soma_Jogador)
-                    .addComponent(Soma_Adversario)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Soma_Adversario, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Soma_Jogador, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -199,23 +204,23 @@ public class Jogo extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Soma_Adversario)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Soma_Adversario)
                         .addGap(101, 101, 101)
                         .addComponent(Botao_Parar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                         .addComponent(Pegar_Carta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Botao_Adicionar_Carta)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)))
-                .addComponent(Soma_Jogador)
-                .addGap(34, 34, 34))
+                        .addGap(18, 18, 18)
+                        .addComponent(Soma_Jogador)
+                        .addGap(34, 34, 34))))
         );
 
         pack();
@@ -281,6 +286,7 @@ public class Jogo extends javax.swing.JFrame {
 
     private void Botao_Adicionar_CartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Botao_Adicionar_CartaActionPerformed
         try {
+            i=+1;
             DAO dao = new DAO();
             dao.adicionar_carta_jogador();
 

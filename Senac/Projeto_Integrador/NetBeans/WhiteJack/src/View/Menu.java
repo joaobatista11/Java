@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 //import java.awt.image.BufferedImage;
 //import java.io.File;
@@ -25,12 +26,14 @@ public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         initComponents();
-                setTitle("Menu");
+        setTitle("Menu");
 
-        Audio audio= new Audio();
-        audio.tocar_musica("src/Sons/heisenberg.wav");
+        // Tocar música após a janela ser exibida
+        SwingUtilities.invokeLater(() -> {
+            Audio.tocar_musica("src/Sons/heisenberg.wav");
+        });
                 
-    setSize(615,615);
+    setSize(615,635);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(null);
@@ -52,17 +55,8 @@ public class Menu extends javax.swing.JFrame {
         p.setBounds(0,0,600,600);
         p.setOpaque(true);
         p.setLayout(null);
-        
-        
-    // Posicione os componentes manualmente
-//    jLabel1.setBounds(150, 30, 400, 70);
-//    Jogar.setBounds(260, 500, 100, 30);
-
-    // Adicione os componentes ao painel
     p.add(jLabel1);
     p.add(Jogar);
-
-    // Adicione o painel ao conteúdo da janela
     getContentPane().add(p);        
     }
 
@@ -90,12 +84,12 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(169, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(169, 169, 169))
             .addGroup(layout.createSequentialGroup()
-                .addGap(264, 264, 264)
+                .addGap(263, 263, 263)
                 .addComponent(Jogar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -104,9 +98,9 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 315, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 387, Short.MAX_VALUE)
                 .addComponent(Jogar)
-                .addGap(140, 140, 140))
+                .addGap(103, 103, 103))
         );
 
         pack();

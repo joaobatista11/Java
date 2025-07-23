@@ -11,15 +11,18 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Audio {
 
     private static Clip clip;
-
-    public void tocar_musica(String caminho) {
-
-        try {
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(caminho));
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY); // loop ativado
-            clip.start();
+    public static void main(String[] args) {
+    tocar_musica("src/Sons/heisenberg.wav");        
+    }
+    public static void tocar_musica(String caminho) {
+ try {
+            if (clip == null || !clip.isRunning()) {
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File(caminho));
+                clip = AudioSystem.getClip();
+                clip.open(audioStream);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+                clip.start();
+            }
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
