@@ -90,6 +90,10 @@ Fiz que pegasse nas pastas ```Imagens``` e ```Sons```, para ser colocados no pro
 
 ![](Senac/Projeto_Integrador/NetBeans/WhiteJack/src/Imagens/Walter_White_Jogo.png)
 
+### Botão adicionar carta
+
+![](Senac/Projeto_Integrador/NetBeans/WhiteJack/src/Imagens/Verso_de_Carta_Vermelha.png)
+
 ### Vitória
 
 ![](Senac/Projeto_Integrador/NetBeans/WhiteJack/src/Imagens/Walter_White_Vitoria.gif)
